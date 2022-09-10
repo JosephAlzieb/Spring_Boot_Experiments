@@ -23,7 +23,7 @@ public class NotificationService {
     // dummy logic to call 3rd party services
     sleep(2);
     System.out.println("called 3rd party to send text message : " + Thread.currentThread().getName());
-
+    System.out.println(10 / 0);
   }
 
 

@@ -21,7 +21,7 @@ public class CustomerController {
   private static final Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
 
   @PostMapping
-  public void createCustomer(@RequestBody Customer customer) {
+  public void createCustomer(@RequestBody @Valid Customer customer) {
     LOGGER.info(
         "RequestBody: firstName: {}, phoneNumber: {}",
         customer.getFirstName(),

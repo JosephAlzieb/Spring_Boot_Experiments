@@ -28,4 +28,13 @@ public class CustomerController {
         customer.getPhoneNumber()
     );
   }
+
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  public List<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    return ex.getBindingResult().getAllErrors()
+        .stream()
+        .map(objectError -> (FieldError) objectError)
+        .map(fieldError -> fieldError.getField() + " - " + fieldError.getDefaultMessage())
+        .collect(Collectors.toList());
+  }
 }

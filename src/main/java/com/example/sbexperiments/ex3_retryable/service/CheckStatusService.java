@@ -28,4 +28,9 @@ public class CheckStatusService {
 
     // return "approved";
   }
+
+  @Recover
+  public String recover(HttpServerErrorException exception) {
+    return "Please try after some time!!";
+  }
 }

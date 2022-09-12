@@ -1,13 +1,27 @@
 package com.example.sbexperiments.ex3_retryable.service;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Recover;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 
 @Service
 public class CheckStatusService {
 
+
+  //value ==> at wich exception should this method be retried
+  //maxAttempts ==> how meany times
+  //backoff ==> interval
+  @Retryable(value = HttpStatusCodeException.class, maxAttempts = 3, backoff = @Backoff(3000), exclude =
+      HttpClientErrorException.class)
   public String checkStatus(String trackingNumber) {
+
+    // another microservice call to get status.
+    //rest template call
 
     System.out.println("calling another service to get status!!");
     throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);

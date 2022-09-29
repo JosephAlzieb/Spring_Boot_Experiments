@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepository {
 
-  private List<User> users = new ArrayList<>();
+  private final List<User> users = new ArrayList<>();
 
   public List<User> getUsers() {
     return users;
@@ -17,7 +17,7 @@ public class UserRepository {
     this.users.add(user);
   }
 
-  public void setUsers(List<User> users) {
-    users.remove(users);
+  public void deleteUser(User user) {
+    users.remove(user);
   }
 }
